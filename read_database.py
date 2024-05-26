@@ -35,5 +35,21 @@ items = session.query(MenuItem).all()
 # firstResult = session.query(Restaurant).first()
 # print('firstResult', firstResult.name)
 
-for item in items:
-    print('name', item.name)
+# for item in items:
+#     print('name', item.name)
+
+# foodOfBurgers = session.query(MenuItem).filter_by(name = 'Cheese Pizza')
+# for item in foodOfBurgers:
+#     print(item.id)
+#     print(item.name)    # Cheese Pizza
+#     print(item.price)   # $8.99
+
+    # update 更新数据
+updateBurgers = session.query(MenuItem).filter_by(id = 8).one()
+updateBurgers.name = 'ppx'
+updateBurgers.price = "$99"
+session.add(updateBurgers)
+session.commit()
+
+foodOfBurgersUpdated = session.query(MenuItem).filter_by(id = 8).one()
+print('foodOfBurgersUpdated', foodOfBurgersUpdated.name, foodOfBurgersUpdated.price) # foodOfBurgersUpdated ppx $99
