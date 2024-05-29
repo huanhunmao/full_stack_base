@@ -1,7 +1,7 @@
 # 导入所需的模块
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Restaurant, MenuItem
+from database_setup import Base, Restaurant, MenuItem, Employee, Address
 
 # 创建数据库引擎
 engine = create_engine('sqlite:///restaurantmenu.db')
@@ -21,7 +21,7 @@ session.commit()
 
 # 查询所有的餐厅记录
 restaurants = session.query(Restaurant).all()
-print(restaurants)
+# print(restaurants)
 
 # 创建一个新的MenuItem对象
 cheese_pizza = MenuItem(name = "Cheese Pizza", description = "Made with all natural ingredients and fresh mozzarella", course = "Entree", price = "$8.99", restaurant = myFirstRestaurant)
@@ -45,11 +45,22 @@ items = session.query(MenuItem).all()
 #     print(item.price)   # $8.99
 
     # update 更新数据
-updateBurgers = session.query(MenuItem).filter_by(id = 8).one()
-updateBurgers.name = 'ppx'
-updateBurgers.price = "$99"
-session.add(updateBurgers)
-session.commit()
+# updateBurgers = session.query(MenuItem).filter_by(id = 8).one()
+# updateBurgers.name = 'ppx'
+# updateBurgers.price = "$99"
+# session.add(updateBurgers)
+# session.commit()
+#
+# foodOfBurgersUpdated = session.query(MenuItem).filter_by(id = 8).one()
+# print('foodOfBurgersUpdated', foodOfBurgersUpdated.name, foodOfBurgersUpdated.price) # foodOfBurgersUpdated ppx $99
 
-foodOfBurgersUpdated = session.query(MenuItem).filter_by(id = 8).one()
-print('foodOfBurgersUpdated', foodOfBurgersUpdated.name, foodOfBurgersUpdated.price) # foodOfBurgersUpdated ppx $99
+
+# 读取 员工/地址信息
+person1 = session.query(Employee).first()
+# print(person1) # None
+# 先添加人
+newPersons = Employee(name = 'PPX')
+session.add(newPersons)
+session.commit()
+persons = session.query(Employee).all()
+print(persons)

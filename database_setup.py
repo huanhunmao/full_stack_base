@@ -25,5 +25,23 @@ class MenuItem(Base):
     restaurant_id = Column(Integer, ForeignKey('restaurant.id'))
     restaurant = relationship(Restaurant)
 
+
+class Employee(Base):
+    __tablename__ = 'employee'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+
+
+class Address(Base):
+    __tablename__ = 'address'
+
+    id = Column(Integer, primary_key=True)
+    street = Column(String(80), nullable=False)
+    zip = Column(String(5), nullable=False)
+    employee_id = Column(Integer, ForeignKey('employee.id'))
+
+
 engine = create_engine('sqlite:///restaurantmenu.db')
+print('engine', engine)
 Base.metadata.create_all(engine)
